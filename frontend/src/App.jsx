@@ -12,6 +12,7 @@ import BeneficiariesPage from './pages/BeneficiariesPage';
 import DatabaseOperationsPage from './pages/DatabaseOperationsPage';
 import GraphSchemaPage from './pages/GraphSchemaPage';
 import Neo4jPage from './pages/Neo4jPage';
+import SqlOperationsPage from './pages/SqlOperationsPage';
 import { api } from './services/api';
 import './styles/App.css';
 
@@ -62,6 +63,8 @@ function App() {
         return { title: 'Relational Graph Schema', desc: 'Visual representation of document references and entity relationships.' };
       case 'neo4j':
         return { title: 'Neo4j Graph Database — Cypher CRUD', desc: 'Create, Read, Update & Delete nodes and relationships using Cypher queries on a live Neo4j AuraDB graph.' };
+      case 'sql':
+        return { title: 'Relational SQL Database — SQLite Operations', desc: 'Inspect the normalized SQL schema, browse tables, run SQL queries, and execute JOIN aggregations.' };
       default:
         return { title: 'Food Management System', desc: 'Connected to MongoDB Atlas' };
     }
@@ -108,6 +111,7 @@ function App() {
           {activeTab === 'database' && <DatabaseOperationsPage />}
           {activeTab === 'schema' && <GraphSchemaPage />}
           {activeTab === 'neo4j' && <Neo4jPage />}
+          {activeTab === 'sql' && <SqlOperationsPage />}
         </main>
       </div>
     </div>

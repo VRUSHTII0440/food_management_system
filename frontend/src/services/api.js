@@ -84,4 +84,27 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     }).then(handleResponse),
+
+  // Relational SQL Lab (SQLite)
+  getSqlStatus: () => fetch(`${API_BASE}/sql/status`).then(handleResponse),
+  getSqlTables: () => fetch(`${API_BASE}/sql/tables`).then(handleResponse),
+  getSqlSchema: (table) => fetch(`${API_BASE}/sql/schema/${table}`).then(handleResponse),
+  getSqlRows: (table, params = {}) => {
+    const q = new URLSearchParams(params).toString();
+    return fetch(`${API_BASE}/sql/rows/${table}${q ? `?${q}` : ''}`).then(handleResponse);
+  },
+  runSqlQuery: (sql) =>
+    fetch(`${API_BASE}/sql/query`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sql }),
+    }).then(handleResponse),
+  runSqlStatement: (sql) =>
+    fetch(`${API_BASE}/sql/execute`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sql }),
+    }).then(handleResponse),
+  getSqlJoins: () => fetch(`${API_BASE}/sql/joins`).then(handleResponse),
+  runSqlJoin: (id) => fetch(`${API_BASE}/sql/joins/${id}`).then(handleResponse),
 };
